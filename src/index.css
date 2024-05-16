@@ -1,0 +1,99 @@
+*{ 
+  margin:0; 
+  padding:0; 
+  box-sizing:border box ; 
+  font-family: gilroy;
+}
+    html,body
+{ 
+      width:100% ;
+    height:100%;
+ }
+ #main{ 
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(24, 24, 24);
+  color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2px;
+ } 
+ #counter{ 
+  width: 60%;
+  padding: 20px;
+  height: 50px;
+  border: 2px solid orange;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+ }
+ #two{ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+ #sec1{ 
+  width: 60%;
+  background-color: orange;
+  padding: 20px;
+  margin-bottom: 10px;
+ }
+ #sec2{ 
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 60%; 
+  padding: 20px;
+  border: 1px solid white;
+  margin-top: 10px;
+  
+ } 
+ input{ 
+  padding: 7px 21px;
+  background-color: transparent;
+  border: 1px solid white;
+  color: whitesmoke;
+ }
+ #sec_input{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 1px;
+ }
+ #sec3{ 
+   width: 60%;
+   padding: 20px; 
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 1px;
+   flex-direction: column;
+   margin-top: 5px;
+   border: 1px solid orange;
+ }
+ #prop{ 
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 70px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid orange;
+ }
+ #extra_prop{ 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+  padding: 5px;
+  border: 1px solid white;
+ }
+#checkbox{ 
+  width: 60px;
+  height: 60px;
+  background-color: orange;
+}
+
