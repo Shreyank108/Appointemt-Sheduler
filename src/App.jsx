@@ -1,11 +1,50 @@
-import React from 'react'
+import { nanoid } from 'nanoid'
+import React, { useState } from 'react'
 
 const App = () => {
- 
-  const SubmitHandler=(e)=>{ 
-    e.preventDefault()
-  }
+   
+   const [appoint, setappoint]=useState(
+    
+    JSON.parse(localStorage.getItem('appointments'))
+    || 
+    []
 
+   )
+
+   const[name,setname]=useState("")
+   const[mail,setmail]=useState("")
+   const[contact,setcontact]=useState("")
+   const[time,settime]=useState("")
+   const[date,setdate]=useState("")
+
+  const SubmitHandler=(e)=>{ 
+    e.preventDefault() 
+  const newlist= {id:nanoid(),name,mail,contact,time,date,completed:false} 
+    setappoint([...appoint,newlist]) 
+    setname("")
+    setcontact("")
+    setdate("")
+    setmail("")
+    settime("") 
+    
+    localStorage.setItem("appointments",JSON.stringify([...appoint,newlist]))
+
+  }
+  console.log(appoint);
+  
+  const CompleteHandler=(index)=>{  
+        const copyappoint =[...appoint] 
+        copyappoint[index].completed = !copyappoint[index].completed; 
+        setappoint(copyappoint) 
+        localStorage.setItem("appointments",JSON.stringify(copyappoint))
+  }
+  const DeleteHandler = (index)=>{ 
+         const copyappoint =[...appoint] 
+         copyappoint.splice(index,1) 
+         setappoint(copyappoint) 
+         localStorage.setItem("appointments",JSON.stringify(copyappoint))
+  }
+  const incompleteCount = appoint.filter(a => !a.completed).length
   return (
   <div id="main">
         <div id="counter">
@@ -13,7 +52,9 @@ const App = () => {
                 <h2>Yet to Appoint</h2>
               </div>
               <div id="two">
-              <h1>4</h1> <h1><b>/</b></h1> <h1>10</h1>
+              <h1>
+              {incompleteCount}
+                </h1> <h1><b>/</b></h1> <h1>{appoint.length}</h1>
               </div>
           
         </div>
@@ -22,11 +63,12 @@ const App = () => {
         </div>
         <div id="sec_input">
              <form onSubmit={SubmitHandler}>
-                <input type="text" placeholder='Name' />
-                <input type="text" placeholder='Email' />
-                <input type="text" placeholder='Contact' />
-                <input type="text" placeholder='Time'/>
-                <input type="text" placeholder='Date'/>
+                <input onChange={(e)=>setname(e.target.value)} type="text" placeholder='Name' />
+                <input onChange={(e)=>setmail(e.target.value)} type="text" placeholder='Email' />
+                <input onChange={(e)=>setcontact(e.target.value)} type="text" placeholder='Contact' />
+                <input onChange={(e)=>settime(e.target.value)} type="text" placeholder='Time'/>
+                <input onChange={(e)=>setdate(e.target.value)} type="text" placeholder='Date'/>
+                <button><p><b>Submit Data Here</b></p></button>
              </form>
         </div>
         <div id="sec2">
@@ -37,18 +79,37 @@ const App = () => {
               <p><b>Date</b></p>
         </div>
         <div id="sec3">
-              <div id="extra_prop">
-                  <div id="prop">
-                    <p><b>Shreyank Agrawal</b></p>
-                    <p><b>shreyank@123</b></p>
-                    <p><b>74294234</b></p>
-                    <p><b>6:00 pm</b></p>
-                    <p><b>16 May</b></p>
+          {appoint.length >0 ? ( 
+            appoint.map((i,index)=>{  
+              return (
+                <div id="extra_prop">
+                <div id="prop">
+                  <p><b>{i.name}</b></p>
+                  <p><b>{i.mail}</b></p>
+                  <p><b>{i.contact}</b></p>
+                  <p><b>{i.time}</b></p>
+                  <p><b>{i.date}</b></p>
+                </div>
+                <div id="prop1">
+                  <div 
+                   onClick={()=>CompleteHandler(index)} 
+                   style={{ backgroundColor: i.completed ? 'green' : 'orange' }}
+                  id="checkbox"></div> 
+                  <div 
+                   onClick={()=>DeleteHandler(index)}
+                  id="deletebox">
+                    <p><b>🍭</b></p>
                   </div>
-                  <div id="prop1">
-                    <div id="checkbox"></div>
-                  </div>
-              </div>
+                </div>
+            </div>
+              )
+             
+            })
+              
+          ): ( 
+            <h1>No Appoint Sheduled</h1>
+          )}
+            
         
         </div>
   </div>
